@@ -8,6 +8,20 @@ class User < ActiveRecord::Base
   
   before_validation :ensure_session_token
   
+  has_many(
+    :moderated_subs,
+    class_name: "Sub",
+    foreign_key: :moderator_id,
+    primary_key: :id
+  )
+  
+  has_many(
+    :posts,
+    class_name: 'Post',
+    foreign_key: :author_id,
+    primary_key: :id
+  )
+  
   def self.authenticate_user(username, password)
     user = User.find_by(username: username)
     

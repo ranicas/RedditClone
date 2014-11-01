@@ -1,0 +1,9 @@
+<h2>Edit Sub: <%= @sub.title %></h2>
+
+<%= render "shared/errors" %>
+
+<form action="<%= sub_url(@sub) %>" method="POST">
+ <input type="hidden" name="_method" value="PATCH">
+  <%= render "form" %>
+  <input type="submit" value="Save!">  
+</form>

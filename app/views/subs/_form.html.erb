@@ -1,0 +1,15 @@
+<input type="hidden"
+       name="authenticity_token"
+       value="<%= form_authenticity_token %>">
+       
+<label for="title">Title</label>  
+<input type="text"
+       name="sub[title]"
+       id="title"
+       value="<%= @sub.title %>">
+<br>
+<label for="description">Description</label>
+
+<textarea name="sub[description]"
+       id="description"><%= @sub.description %></textarea>
+<br>

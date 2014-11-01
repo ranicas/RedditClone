@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   
+  before_action :redirect_to_index_if_logged_in, only: [:new]
+  
   def new
     @user = User.new
     render :new
@@ -17,7 +19,7 @@ class SessionsController < ApplicationController
       render :new
     else
       log_in!(@user)
-      redirect_to user_url(@user)
+      redirect_to subs_url
     end
       
   end

@@ -1,0 +1,40 @@
+<input type="hidden"
+      name="authenticity_token"
+      value="<%= form_authenticity_token %>">
+      
+      <br>
+      
+<label for="title">Title:</label>
+  <input type="text"
+          name="post[title]"
+          id="title"
+          value="<%= @post.title %>">
+          
+  <br>   
+       
+<label for="url">URL:</label>
+<input type="text"
+       name="post[url]"
+       id="url"
+       value="<%= @post.url %>">
+  
+  <br>
+       
+<label for="content">Content:</label>
+<textarea name="post[url]"
+       id="url"><%= @post.url %></textarea>
+
+<br>
+<label for="subs">Subs:</label><br>
+<input type="hidden" name ="post[sub_ids][]" value="">
+<% @subs.each do |sub| %>
+  <label> 
+    <input type="checkbox" 
+           name="post[sub_ids][]" 
+           id="subs"
+          value="<%= sub.id %>"
+          <%= "checked" if @post.subs.include?(sub) %>>
+    <%= sub.title %>
+  </label>
+  <br>
+<% end %>

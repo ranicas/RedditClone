@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
-  before_action
+  helper_method :logged_in?, :current_user
   
   def current_user
     return nil if session[:session_token].nil?
@@ -23,8 +23,12 @@ class ApplicationController < ActionController::Base
     User.find_by(session_token: session[:session_token])
   end
   
-  def redirect_to_signin
+  def redirect_to_signin_if_logged_out
     redirect_to new_session_url unless logged_in?
+  end
+  
+  def redirect_to_index_if_logged_in
+    redirect_to subs_url if logged_in?
   end
   
 end

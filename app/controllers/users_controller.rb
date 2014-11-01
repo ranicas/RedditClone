@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
-  before_action :redirect_to_signin, only: [:show]
-  
+  before_action :redirect_to_signin_if_logged_out, only: [:show]
+  before_action :redirect_to_index_if_logged_in, only: [:new]
   def new
     @user = User.new
     render :new
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     
     if @user.save
       log_in!(@user)
-      redirect_to user_url(@user)
+      redirect_to subs_url
     else
       flash[:errors] = @user.errors.full_messages
       render :new 
@@ -35,6 +35,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts
     render :show
   end
   
